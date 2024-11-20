@@ -1,49 +1,63 @@
-// Elements
-const themeToggle = document.getElementById('theme-toggle');
-const progressBar = document.getElementById('progress-bar');
-const progress = document.querySelector('.progress');
-const notification = document.getElementById('notification');
-const videoPreview = document.getElementById('video-preview');
+document.addEventListener('DOMContentLoaded', () => {
+    const fetchButton = document.getElementById('fetch-video');
+    const downloadButton = document.getElementById('download-btn');
+    const qualitySelect = document.getElementById('quality-select');
+    const progressBar = document.getElementById('progress');
+    const errorMessage = document.getElementById('error-message');
+    const settingsButton = document.getElementById('settings-btn');
+    const helpButton = document.getElementById('help-btn');
 
-// Theme Toggle
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('light-theme');
-});
+    fetchButton.addEventListener('click', () => {
+        const url = document.getElementById('youtube-url').value;
+        if (!isValidURL(url)) {
+            showError("Invalid YouTube URL. Please try again.");
+            return;
+        }
+        fetchVideoDetails(url);
+    });
 
-// Download Button
-document.getElementById('download-btn').addEventListener('click', () => {
-  // Simulate Progress
-  progressBar.classList.remove('hidden');
-  let progressValue = 0;
-  const interval = setInterval(() => {
-    progressValue += 10;
-    progress.style.width = `${progressValue}%`;
-    if (progressValue >= 100) {
-      clearInterval(interval);
-      progressBar.classList.add('hidden');
-      showNotification('✅ Download Complete!');
+    downloadButton.addEventListener('click', () => {
+        const quality = qualitySelect.value;
+        startDownload(quality);
+    });
+
+    settingsButton.addEventListener('click', () => {
+        alert('Settings will be available in the next update.');
+    });
+
+    helpButton.addEventListener('click', () => {
+        alert('To use this extension, paste a YouTube URL, select quality, and click "Download Now".');
+    });
+
+    function isValidURL(url) {
+        const regex = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+        return regex.test(url);
     }
-  }, 500);
+
+    function fetchVideoDetails(url) {
+        // Simulate video fetching
+        console.log(`Fetching video details for: ${url}`);
+        showProgress(0);
+        setTimeout(() => showProgress(50), 1000);
+        setTimeout(() => showProgress(100), 2000);
+    }
+
+    function startDownload(quality) {
+        console.log(`Downloading video in ${quality} quality...`);
+        showProgress(0);
+        setTimeout(() => showProgress(50), 1000);
+        setTimeout(() => {
+            showProgress(100);
+            alert('Download complete!');
+        }, 2000);
+    }
+
+    function showProgress(percent) {
+        progressBar.style.width = `${percent}%`;
+    }
+
+    function showError(message) {
+        errorMessage.textContent = message;
+        setTimeout(() => errorMessage.textContent = '', 3000);
+    }
 });
-
-// Show Notification
-function showNotification(message) {
-  notification.textContent = message;
-  notification.classList.remove('hidden');
-  setTimeout(() => notification.classList.add('hidden'), 3000);
-}
-
-// Simulate Video Preview
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  const url = tabs[0].url;
-  if (url.includes('youtube.com/watch')) {
-    videoPreview.innerHTML = `<img src="https://img.youtube.com/vi/${extractVideoID(url)}/0.jpg" alt="Video Thumbnail">`;
-  }
-});
-
-// Extract Video ID
-function extractVideoID(url) {
-  const regex = /v=([a-zA-Z0-9_-]+)/;
-  const match = url.match(regex);
-  return match ? match[1] : '';
-}
