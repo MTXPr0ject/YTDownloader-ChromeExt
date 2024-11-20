@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Downloader</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">🎬 YouTube Downloader</h1>
+      <button id="theme-toggle" class="theme-btn">🌗</button>
+    </div>
+
+    <p class="description">Download YouTube videos or convert them to MP3 with ease.</p>
+    
+    <div id="video-preview" class="video-preview">
+      <p>No video selected</p>
+    </div>
+    
+    <div class="dropdown-container">
+      <label for="quality" class="label">Choose Quality:</label>
+      <select id="quality" class="dropdown">
+        <option value="mp3">MP3 (Audio Only)</option>
+        <option value="1080p">1080p (Full HD)</option>
+        <option value="4k">4K (Ultra HD)</option>
+      </select>
+    </div>
+
+    <button id="download-btn" class="button">Download Now 🚀</button>
+    
+    <div id="progress-bar" class="progress-bar hidden">
+      <div class="progress"></div>
+    </div>
+    
+    <div id="notification" class="notification hidden"></div>
+
+    <footer>
+      <button id="settings-btn" class="settings-btn">⚙️ Settings</button>
+      <p class="footer-text">Powered by <strong>Your Extension</strong></p>
+    </footer>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
