@@ -1,47 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouTube Downloader</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTDownloader</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1 class="title">🎬 YouTube Downloader</h1>
-      <button id="theme-toggle" class="theme-btn">🌗</button>
+    <div class="popup-container">
+        <h1 class="title">YTDownloader</h1>
+        <p class="subtitle">Download YouTube videos in MP3 or 4K effortlessly!</p>
+
+        <div class="url-input">
+            <input type="text" id="youtube-url" placeholder="Paste YouTube URL here">
+            <button id="fetch-video">Fetch</button>
+        </div>
+
+        <div class="quality-options">
+            <label for="quality-select">Select Quality:</label>
+            <select id="quality-select">
+                <option value="mp3">MP3 (Audio Only)</option>
+                <option value="1080p">1080p (HD Video)</option>
+                <option value="4k">4K (Ultra HD)</option>
+            </select>
+        </div>
+
+        <div class="actions">
+            <button id="download-btn">Download Now</button>
+        </div>
+
+        <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+        </div>
+
+        <div id="error-message" class="error-message"></div>
+
+        <div class="extras">
+            <button id="settings-btn">⚙️ Settings</button>
+            <button id="help-btn">❓ Help</button>
+        </div>
     </div>
 
-    <p class="description">Download YouTube videos or convert them to MP3 with ease.</p>
-    
-    <div id="video-preview" class="video-preview">
-      <p>No video selected</p>
-    </div>
-    
-    <div class="dropdown-container">
-      <label for="quality" class="label">Choose Quality:</label>
-      <select id="quality" class="dropdown">
-        <option value="mp3">MP3 (Audio Only)</option>
-        <option value="1080p">1080p (Full HD)</option>
-        <option value="4k">4K (Ultra HD)</option>
-      </select>
-    </div>
-
-    <button id="download-btn" class="button">Download Now 🚀</button>
-    
-    <div id="progress-bar" class="progress-bar hidden">
-      <div class="progress"></div>
-    </div>
-    
-    <div id="notification" class="notification hidden"></div>
-
-    <footer>
-      <button id="settings-btn" class="settings-btn">⚙️ Settings</button>
-      <p class="footer-text">Powered by <strong>Your Extension</strong></p>
-    </footer>
-  </div>
-  
-  <script src="popup.js"></script>
+    <script src="popup.js"></script>
 </body>
 </html>
